@@ -5,12 +5,17 @@ function Question({ question, onAnswered }) {
 
   // add useEffect code
   useEffect(()=>{
-    setTimeout(()=>{
+    const timeOutID = setTimeout(()=>{
       setTimeRemaining((timeRemaining)=>timeRemaining-1)
     },1000)
     //create an if statement for when the time gets down to zero
     if (timeRemaining===0){
       return handleNoAnswer
+    }
+
+    //!study why this is necessary. Ask TI what this does and how it's cleaning anything up.
+    return function cleanup() {
+      clearTimeout(timeOutID)
     }
   }
   )
